@@ -1,0 +1,28 @@
+[
+  {
+    "firstname": "Testers",
+    "lastname": "Talk",
+    "city": "San Jose",
+    "address": "Address 1",
+    "state": "CA",
+    "zipcode": "12345",
+    "phonenumber": "1234567898",
+    "ssn": "123451234",
+    "username": "Testers",
+    "password": "1234567891",
+    "confirmpassword": "1234567891"
+  },
+  {
+    "firstname": "Automation",
+    "lastname": "User",
+    "city": "New York",
+    "address": "Address 2",
+    "state": "NY",
+    "zipcode": "54321",
+    "phonenumber": "9876543210",
+    "ssn": "987659876",
+    "username": "AutoUser",
+    "password": "password123",
+    "confirmpassword": "password123"
+  }
+]
