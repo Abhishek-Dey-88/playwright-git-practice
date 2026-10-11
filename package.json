@@ -3,14 +3,19 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "smoke": "npx playwright test --grep @smoke --project=chrome",
+    "regression": "npx playwright test --grep @regression --project=chrome",
+    "sanity" : "npx playwright test --grep @sanity --project=chrome"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "module",
   "devDependencies": {
     "@playwright/test": "^1.63.0",
-    "@types/node": "^26.6.4"
+    "@types/node": "^26.6.4",
+    "allure-playwright": "^3.13.0"
   },
   "dependencies": {
     "@faker-js/faker": "^10.6.0"

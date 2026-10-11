@@ -1,12 +1,17 @@
 import {homepage} from './homepage.js'
+import { loggedinpage } from './loggedinpage.js'
 import {registrationpage} from './registrationpage.js'
+import {overviewpage } from './overviewpage.js'
 
 export class POManager{
     constructor(page)
     {
         this.page = page
         this.homePage = new homepage(this.page)
-        this.registrationPage = new registrationpage(this.page)   
+        this.registrationPage = new registrationpage(this.page)
+        this.loggedinPage = new loggedinpage(this.page)
+        this.overviewPage = new overviewpage(this.page) 
+
     }
 
     gethomepage(){
@@ -16,4 +21,13 @@ export class POManager{
     getregistrationpage(){
         return this.registrationPage
     }
+
+    getloggedinpage(){
+        return this.loggedinPage
+    }
+
+    getaccountdetails(){
+        return this.overviewPage
+    }
+
 }

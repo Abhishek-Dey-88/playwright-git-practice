@@ -8,7 +8,7 @@
     "zipcode": "12345",
     "phonenumber": "1234567898",
     "ssn": "123451234",
-    "username": "Testers",
+    "username": "David",
     "password": "1234567891",
     "confirmpassword": "1234567891"
   },
@@ -21,7 +21,7 @@
     "zipcode": "54321",
     "phonenumber": "9876543210",
     "ssn": "987659876",
-    "username": "AutoUser",
+    "username": "Robert",
     "password": "password123",
     "confirmpassword": "password123"
   }

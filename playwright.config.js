@@ -23,7 +23,12 @@ export default defineConfig({
   /* Opt out of parallel tests on CI. */
   workers: process.env.CI ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: 'html',
+  reporter:[['html'],
+             ['dot'],
+             ['line'],
+             ['list'],
+             ['allure-playwright',{outputfolder:'allure-results'}]
+],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('')`. */
@@ -38,40 +43,49 @@ export default defineConfig({
 
   /* Configure projects for major browsers */
   projects: [
+  {
+      name:'chrome',
+       use:
     {
-      name: 'chromium',
-      use: { ...devices['Desktop Chrome'] },
-    }
+      browserName: 'chromium',
+      headless:false,
+      screenshot:'on',
+     trace:'on',
+     video:'on',
+    // viewport:{width:1080,height:720},
+   ...devices['Desktop Chrome'],
+  //  ...devices['iPhone 16 Pro Max landscape'], //''-->will show all mobile options
+   // ...devices['Galaxy S III landscape'],
+    ignoreHTTPSErrors:true,
+   permissions:['geolocation']
 
-    // {
-    //   name: 'firefox',
-    //   use: { ...devices['Desktop Firefox'] },
-    // },
+    },
+    },
+   
 
-    // {
-    //   name: 'webkit',
-    //   use: { ...devices['Desktop Safari'] },
-    // },
+  // {
+  //     name:'firefox',
+  //      use:
+  //   {
+  //     browserName: 'firefox',
+  //     headless:true,
+  //     screenshot:'only-on-failure',
+  //    trace:'retain-on-failure',
+  //    video:'retain-on-failure'
+  //   },
+  //   },
 
-    /* Test against mobile viewports. */
-    // {
-    //   name: 'Mobile Chrome',
-    //   use: { ...devices['Pixel 5'] },
-    // },
-    // {
-    //   name: 'Mobile Safari',
-    //   use: { ...devices['iPhone 12'] },
-    // },
-
-    /* Test against branded browsers. */
-    // {
-    //   name: 'Microsoft Edge',
-    //   use: { ...devices['Desktop Edge'], channel: 'msedge' },
-    // },
-    // {
-    //   name: 'Google Chrome',
-    //   use: { ...devices['Desktop Chrome'], channel: 'chrome' },
-    // },
+  //   {
+  //     name:'safari',
+  //      use:
+  //   {
+  //     browserName: 'webkit',
+  //     headless:true,
+  //     screenshot:'only-on-failure',
+  //    trace:'retain-on-failure',
+  //    video:'retain-on-failure'
+  //   },
+  // }
   ],
 
   /* Run your local dev server before starting the tests */

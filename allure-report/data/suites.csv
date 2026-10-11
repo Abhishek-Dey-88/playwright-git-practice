@@ -1,0 +1,3 @@
+"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
+"","17505","@regressionbankregistartioncheck","chrome","2026-10-11","passed","2026-10-11","","e2etestscripts.spec.js","",""
+"","10468","@regressionlogin&openewaccountcheck","chrome","2026-10-11","passed","2026-10-11","","e2etestscripts.spec.js","",""
