@@ -1,96 +1,100 @@
 import { customtest as test, expect } from "../fixture/testfixtures.js";
+import { createStepLogger } from "../utils/steps.js";
 
 test.describe.configure({ mode: "serial" });
 
 test("@regressionbankregistartioncheck", async ({ pomanager, testdata }) => {
+  const step = createStepLogger();
   const data = testdata.datafiller();
   const [username, password] = data.slice(8);
 
-  await pomanager.gethomepage().goTo();
-  await pomanager.gethomepage().clickonregisterlink();
-  await pomanager.getregistrationpage().fillregistrationform(...data); //... is a spread operator
-  await pomanager.getregistrationpage().clickonregisterbtn();
-  await expect(
-    pomanager.getregistrationpage().successregistrationmessage,
-  ).toBeVisible();
-
-  testdata.savecredentials(username, password);
-});
-
-/*
-for (const data of testData)
-{
-
-test(`datadriventc ${data.username}`, async ({ page }) => {
-
-  const username =  `${data.username}${Date.now()}`;
-
-  const pomanager = new POManager(page)
-  const homepage = pomanager.gethomepage()
-  const registrationPage = pomanager.getregistrationpage()
-
-  await homepage.goTo();
-  await homepage.clickonregisterlink();
-  await registrationPage.fillregistrationform(
-    data.firstname,
-    data.lastname,
-    data.address,
-    data.city,
-    data.state,
-    data.zipcode,
-    data.phonenumber,
-    data.ssn,
-    username,
-    data.password
-);
-  await registrationPage.clickonregisterbtn();
-  // await page.waitForTimeout(2000);
-
-  // await expect(registrationPage.successregistrationmessage).toBeVisible();
-})
-};
-
-
-ctest.("bankregistartion with fixtureS",async ({ page, testdataForregistration }) => {
-  const pomanager = new POManager(page);
-  const homepage = pomanager.gethomepage();
-  const registrationPage = pomanager.getregistrationpage();
-
-  await homepage.goTo();
-  await homepage.clickonregisterlink();
-  await registrationPage.fillregistrationform(
-    testdataForregistration.firstname,
-    testdataForregistration.lastname,
-    testdataForregistration.address,
-    testdataForregistration.city,
-    testdataForregistration.state,
-    testdataForregistration.zipcode,
-    testdataForregistration.phonenumber,
-    testdataForregistration.ssn,
-    testdataForregistration.username,
-    testdataForregistration.password,
-  );
-  await registrationPage.clickonregisterbtn();
-  // await page.waitForTimeout(2000);
-
-  // await expect(registrationPage.successregistrationmessage).toBeVisible();
-});
-
-*/
-
-test("@regressionlogin&openewaccountcheck", async ({ pomanager, testdata }) => {
-  await pomanager.gethomepage().goTo();
-  const { username, password } = testdata.getlatestcredentials();
-  await pomanager.gethomepage().login(username, password);
-  await pomanager.getloggedinpage().loggedinuser();
-  await pomanager.getaccountdetails().clinkonopennewaccountlink();
-  await pomanager.getaccountdetails().selectaccount();
-  await pomanager.getaccountdetails().clickopenaccountbtn();
-  const accountDetails = await pomanager.getaccountdetails().getAccountOpenedText();
-  console.log(`Account details:\n${accountDetails}`);
-  await test.info().attach("account-details", {
-    body: accountDetails,
-    contentType: "text/plain",
+  await step("Homepage loading...", async () => {
+    await pomanager.gethomepage().goTo();
+  });
+  await step("Clicking on Register link...", async () => {
+    await pomanager.gethomepage().clickonregisterlink();
+  });
+  await step("Registration form loaded and form filling in progress...", async () => {
+    await pomanager.getregistrationpage().fillregistrationform(...data); //... is a spread operator
+  });
+  await step("Clicking on Register button...", async () => {
+    await pomanager.getregistrationpage().clickonregisterbtn();
+  });
+  await step("Verifying registration success message...", async () => {
+    await expect(
+      pomanager.getregistrationpage().successregistrationmessage,
+    ).toBeVisible();
+  });
+  await step("Saving credentials...", async () => {
+    testdata.savecredentials(username, password);
   });
 });
 
+test("@regressionlogin&openewaccountcheck", async ({ pomanager, testdata }) => {
+  const step = createStepLogger();
+  let username, password;
+
+  await step("Homepage loading...", async () => {
+    await pomanager.gethomepage().goTo();
+  });
+  await step("Logging in with latest saved credentials...", async () => {
+    ({ username, password } = testdata.getlatestcredentials());
+    await pomanager.gethomepage().login(username, password);
+  });
+  await step("Verifying logged in user...", async () => {
+    await pomanager.getloggedinpage().loggedinuser();
+  });
+  await step("Clicking on Open New Account link...", async () => {
+    await pomanager.getaccountdetails().clinkonopennewaccountlink();
+  });
+  await step("Selecting account type...", async () => {
+    await pomanager.getaccountdetails().selectaccount();
+  });
+  await step("Clicking on Open Account button...", async () => {
+    await pomanager.getaccountdetails().clickopenaccountbtn();
+  });
+  await step("Capturing opened account details...", async () => {
+    const accountDetails = await pomanager
+      .getaccountdetails()
+      .getAccountOpenedText();
+    console.log(`Account details:\n${accountDetails}`);
+    await test.info().attach("account-details", {
+      body: accountDetails,
+      contentType: "text/plain",
+    });
+  });
+});
+
+test("@regressiontransferfundscheck", async ({ pomanager, testdata }) => {
+  const step = createStepLogger();
+
+  await step("Homepage loading...", async () => {
+    await pomanager.gethomepage().goTo();
+  });
+  await step("Logging in with latest saved credentials...", async () => {
+    const { username, password } = testdata.getlatestcredentials();
+    await pomanager.gethomepage().login(username, password);
+  });
+  await step("Verifying logged in user...", async () => {
+    await pomanager.getloggedinpage().loggedinuser();
+  });
+  await step("Clicking on Transfer Funds link...", async () => {
+    await pomanager.gettransferfunds().clickontransferfundslink();
+  });
+  await step("Entering transfer amount...", async () => {
+    await pomanager.gettransferfunds().amounttextbox("515");
+  });
+  await step("Clicking on Transfer button...", async () => {
+    await pomanager.gettransferfunds().clickontransferbtn();
+  });
+  await step("Capturing transfer success message...", async () => {
+    const transferSuccessMsg = await pomanager
+      .gettransferfunds()
+      .gettransfersuccessmsg();
+    console.log(`Transfer Success Message:\n${transferSuccessMsg}`);
+    await test.info().attach("transfer-success-message", {
+      body: transferSuccessMsg,
+      contentType: "text/plain",
+    });
+  });
+});

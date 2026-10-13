@@ -1,6 +1,6 @@
-import { test, expect } from '@playwright/test';
-import { POManager } from '../page/POManager.js';
-import { test_Data } from '../utils/datagenerator.js';
+import { test, expect } from "@playwright/test";
+import { POManager } from "../page/POManager.js";
+import { test_Data } from "../utils/datagenerator.js";
 
 export const customtest = test.extend({
   pomanager: async ({ page }, use) => {
@@ -23,9 +23,9 @@ export const customtest = test.extend({
       ssn: "1234512345",
       username: "Testers",
       password: "1234567891",
-      confirmpassword: "1234567891"
+      confirmpassword: "1234567891",
     });
-  }
+  },
 });
 
 export { expect };
