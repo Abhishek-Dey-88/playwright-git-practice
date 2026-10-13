@@ -28,7 +28,7 @@ export default defineConfig({
              ['line'],
              ['list'],
              ['allure-playwright',{outputfolder:'allure-results'}]
-],
+  ],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('')`. */
@@ -37,8 +37,13 @@ export default defineConfig({
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
     launchOptions: {
-            slowMo: 1000
-        }
+      slowMo: 1000,
+      args: [
+        '--no-sandbox',
+        '--disable-setuid-sandbox',
+        '--disable-dev-shm-usage'
+      ]
+    }
   },
 
   /* Configure projects for major browsers */
@@ -48,13 +53,13 @@ export default defineConfig({
        use:
     {
       browserName: 'chromium',
-      headless:false,
+      headless: true,
       screenshot:'on',
      trace:'on',
      video:'on',
     // viewport:{width:1080,height:720},
-   ...devices['Desktop Chrome'],
-  //  ...devices['iPhone 16 Pro Max landscape'], //''-->will show all mobile options
+    ...devices['Desktop Chrome'],
+   //  ...devices['iPhone 16 Pro Max landscape'], //''-->will show all mobile options
    // ...devices['Galaxy S III landscape'],
     ignoreHTTPSErrors:true,
    permissions:['geolocation']
@@ -95,4 +100,3 @@ export default defineConfig({
   //   reuseExistingServer: !process.env.CI,
   // },
 });
-
