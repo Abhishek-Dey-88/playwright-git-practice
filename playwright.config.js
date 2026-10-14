@@ -48,7 +48,7 @@ export default defineConfig({
       name: "chrome",
       use: {
         browserName: "chromium",
-        headless: !!process.env.CI,,
+        headless: !!process.env.CI,
         screenshot: "on",
         trace: "on",
         video: "on",
