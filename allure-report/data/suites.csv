@@ -1,3 +1,6 @@
 "DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
-"","17505","@regressionbankregistartioncheck","chrome","2026-10-11","passed","2026-10-11","","e2etestscripts.spec.js","",""
-"","10468","@regressionlogin&openewaccountcheck","chrome","2026-10-11","passed","2026-10-11","","e2etestscripts.spec.js","",""
+"","19413","@regressionbankregistartioncheck","chrome","2026-10-13","passed","2026-10-13","","e2etestscripts.spec.js","",""
+"","11343","@regressionlogin&openewaccountcheck","chrome","2026-10-13","passed","2026-10-13","","e2etestscripts.spec.js","",""
+"","11019","@regressiontransferfundscheck","chrome","2026-10-13","passed","2026-10-13","","e2etestscripts.spec.js","",""
+"","10957","@regressionlogin&openewaccountcheck","chrome","2026-10-13","passed","2026-10-13","","old_e2etestscripts.spec.js","",""
+"","19161","@regressionbankregistartioncheck","chrome","2026-10-13","passed","2026-10-13","","old_e2etestscripts.spec.js","",""

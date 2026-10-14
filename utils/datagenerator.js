@@ -4,7 +4,6 @@ import fs from "fs";
 const CRED_FILE = "utils/credentials.json";
 
 export class test_Data {
-
   // append a registered user to the history file
   savecredentials(username, password) {
     let saved = [];

@@ -6,7 +6,7 @@
   "scripts": {
     "smoke": "npx playwright test --grep @smoke --project=chrome",
     "regression": "npx playwright test --grep @regression --project=chrome",
-    "sanity" : "npx playwright test --grep @sanity --project=chrome"
+    "sanity": "npx playwright test --grep @sanity --project=chrome"
   },
   "keywords": [],
   "author": "",

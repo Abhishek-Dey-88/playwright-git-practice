@@ -1,33 +1,36 @@
-import {homepage} from './homepage.js'
-import { loggedinpage } from './loggedinpage.js'
-import {registrationpage} from './registrationpage.js'
-import {overviewpage } from './overviewpage.js'
+import { homepage } from "./homepage.js";
+import { loggedinpage } from "./loggedinpage.js";
+import { registrationpage } from "./registrationpage.js";
+import { overviewpage } from "./overviewpage.js";
+import { transferfunds } from "./transferfunds.js";
 
-export class POManager{
-    constructor(page)
-    {
-        this.page = page
-        this.homePage = new homepage(this.page)
-        this.registrationPage = new registrationpage(this.page)
-        this.loggedinPage = new loggedinpage(this.page)
-        this.overviewPage = new overviewpage(this.page) 
+export class POManager {
+  constructor(page) {
+    this.page = page;
+    this.homePage = new homepage(this.page);
+    this.registrationPage = new registrationpage(this.page);
+    this.loggedinPage = new loggedinpage(this.page);
+    this.overviewPage = new overviewpage(this.page);
+    this.transferFunds = new transferfunds(this.page);
+  }
 
-    }
+  gethomepage() {
+    return this.homePage;
+  }
 
-    gethomepage(){
-        return this.homePage
-    }
+  getregistrationpage() {
+    return this.registrationPage;
+  }
 
-    getregistrationpage(){
-        return this.registrationPage
-    }
+  getloggedinpage() {
+    return this.loggedinPage;
+  }
 
-    getloggedinpage(){
-        return this.loggedinPage
-    }
+  getaccountdetails() {
+    return this.overviewPage;
+  }
 
-    getaccountdetails(){
-        return this.overviewPage
-    }
-
+  gettransferfunds() {
+    return this.transferFunds;
+  }
 }
