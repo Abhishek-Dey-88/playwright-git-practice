@@ -28,22 +28,6 @@ export const customtest = test.extend({
 
     await use({ username, password });
   },
-
-  testdataForregistration: async ({}, use) => {
-    await use({
-      firstname: "Testers",
-      lastname: "Talk",
-      city: "San Jose",
-      address: "address1",
-      state: "California",
-      zipcode: "12345",
-      phonenumber: "1234567898",
-      ssn: "1234512345",
-      username: "Testers",
-      password: "1234567891",
-      confirmpassword: "1234567891",
-    });
-  },
 });
 
 export { expect };

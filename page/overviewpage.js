@@ -11,10 +11,6 @@ export class overviewpage {
     this.fromaccountoptions = page.locator("#fromAccountId option");
   }
 
-  async loggedinuser() {
-    await expect(this.userloggedcheck).toBeVisible();
-  }
-
   async clinkonopennewaccountlink() {
     await this.newaccountlinktext.click();
   }
