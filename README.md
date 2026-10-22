@@ -149,11 +149,56 @@ Locally, every test is recorded on video; screenshots and traces are kept only f
 
 GitHub Actions runs the full suite on every push and pull request to `main`. The Playwright HTML report and the Allure results are uploaded as run artifacts.
 
+## Jenkins
+
+The suite also runs on Jenkins through a Freestyle job named `Playwright-Automation`:
+
+- **Source:** this GitHub repository, branch `main`
+- **Trigger:** polls GitHub every 5 minutes (`H/5 * * * *`) and builds when there is a new commit
+- **Agent:** Windows
+- **Report:** the Allure report is published on every build, including failed ones
+
+### Requirements on the Jenkins machine
+
+- Node.js and Git on the system `PATH`
+- Jenkins plugins: **Git** and **Allure**
+- An Allure installation named `Allure` under **Manage Jenkins → Tools → Allure Commandline installations**
+
+### Build step
+
+Add an **Execute Windows batch command** build step with:
+
+```bat
+set CI=true
+
+node --version
+call npm --version
+git --version
+
+rem Remove result files committed in the repository so the report shows only this build
+if exist allure-results rmdir /s /q allure-results
+
+call npm ci
+if errorlevel 1 exit /b %errorlevel%
+
+call npx playwright install chromium
+if errorlevel 1 exit /b %errorlevel%
+
+call npx playwright test
+if errorlevel 1 exit /b %errorlevel%
+```
+
+`set CI=true` makes the run use the CI settings in [playwright.config.js](playwright.config.js): headless browser, parallel workers, two retries, and screenshots, traces and videos for every test.
+
+> **Note:** `npm` and `npx` are batch files on Windows, so they must be run with `call`. Without `call`, the build step stops after that line and the build reports success without running the tests.
+
+### Post-build action
+
+Add **Allure Report** with the results path `allure-results`.
+
 ## Note
 
 ParaBank is a public demo site behind Cloudflare. A test can occasionally fail on a "Performing security verification" page; CI retries failed tests twice.
-npx playwright install
-```
 
 ## Running the Tests
 
