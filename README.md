@@ -245,3 +245,4 @@ This project is licensed under the ISC license as declared in `package.json`.
 ## Author
 
 Abhishek Dey
+Sr. QA Analyst
