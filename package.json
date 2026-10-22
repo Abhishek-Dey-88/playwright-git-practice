@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "build": "npx playwright install --with-deps && npx playwright test",
     "smoke": "npx playwright test --grep @smoke --project=chrome",
     "regression": "npx playwright test --grep @regression --project=chrome",
     "sanity": "npx playwright test --grep @sanity --project=chrome"
