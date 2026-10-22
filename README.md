@@ -1,18 +1,26 @@
+![GitHub Repo stars](https://img.shields.io/github/stars/Abhishek-Dey-88/playwright-git-practice?style=for-the-badge)
+![GitHub last commit](https://img.shields.io/github/last-commit/Abhishek-Dey-88/playwright-git-practice?style=for-the-badge)
+![GitHub language count](https://img.shields.io/github/languages/count/Abhishek-Dey-88/playwright-git-practice?style=for-the-badge)
+![Playwright](https://img.shields.io/badge/Playwright-%E2%9C%93-45BA4B?style=for-the-badge&logo=playwright)
+
 # Playwright Git Practice
 
-A practical Playwright automation project designed for Git practice and browser-based end-to-end testing. This repository demonstrates how to structure automated UI tests with the Page Object Model (POM), reusable fixtures, and quality reporting using Playwright and Allure.
+A focused Playwright automation project built for practicing Git workflows and browser-based end-to-end testing. The repository demonstrates a clean automation structure with reusable page objects, fixtures, data generation, and test reporting.
 
 ## Overview
 
-This project targets the ParaBank demo application and covers common web flows such as:
+This project is designed to validate real-world web application flows against the ParaBank demo site. It covers the most common UI regression paths and follows a maintainable test architecture that is easy to extend.
 
-- User registration
-- Valid and invalid login scenarios
-- Password recovery / forgot login
-- Account creation
-- Funds transfer
-- Bill payment
-- Field validation checks
+## Key Features
+
+- End-to-end testing with Playwright
+- Page Object Model (POM) implementation
+- Reusable test fixtures and utilities
+- Dynamic test data generation
+- Regression-style test coverage
+- Step-level logging for better debugging
+- HTML and Allure reporting
+- Browser automation for login, registration, transfers, and bill payment flows
 
 ## Tech Stack
 
@@ -22,35 +30,35 @@ This project targets the ParaBank demo application and covers common web flows s
 - Faker.js
 - Allure Playwright
 
-## Repository Structure
+## Project Structure
 
 ```text
 playwright-git-practice/
 ├── .github/                 # GitHub-related configuration
-├── .codex/                 # Project metadata/configuration
+├── .codex/                  # Project metadata/configuration
 ├── .playwright-mcp/         # Playwright MCP setup files
-├── .vscode/                # Editor settings
-├── allure-report/          # Generated HTML report
-├── allure-results/         # Raw Allure results
-├── fixture/                # Playwright fixtures
-│   └── testfixtures.js
-├── page/                   # Page Object Model files
-│   ├── POManager.js
-│   ├── billpay.js
-│   ├── forgotloginpage.js
-│   ├── homepage.js
-│   ├── loggedinpage.js
-│   ├── overviewpage.js
-│   ├── registrationpage.js
-│   └── transferfunds.js
-├── specs/                  # Additional test specs
-├── test-plans/             # Test planning artifacts
-├── tests/                  # Playwright test suite
+├── .vscode/                 # VS Code workspace settings
+├── allure-report/           # Generated HTML report
+├── allure-results/          # Raw Allure test results
+├── fixture/
+│   └── testfixtures.js     # Reusable Playwright test fixtures
+├── page/
+│   ├── POManager.js         # Central page object manager
+│   ├── billpay.js           # Bill pay page object
+│   ├── forgotloginpage.js  # Forgot login page object
+│   ├── homepage.js          # Homepage page object
+│   ├── loggedinpage.js      # Logged-in page object
+│   ├── overviewpage.js      # Account overview page object
+│   ├── registrationpage.js  # Registration page object
+│   └── transferfunds.js     # Transfer funds page object
+├── specs/                   # Additional specs folder
+├── test-plans/              # Test planning files
+├── tests/
 │   ├── e2etestscripts.spec.js
 │   └── old_e2etestscripts.spec.js
-├── utils/                  # Shared helpers and utilities
-│   ├── datagenerator.js
-│   ├── steps.js
+├── utils/
+│   ├── datagenerator.js     # Fake user and data generation
+│   ├── steps.js             # Step logger utility
 │   └── ...
 ├── .gitignore
 ├── .mcp.json
@@ -64,12 +72,12 @@ playwright-git-practice/
 
 ## Prerequisites
 
-Before running the project, ensure you have:
+Make sure you have the following installed on your machine:
 
-- Node.js installed
-- npm installed
-- Playwright browser dependencies installed
-- Access to the internet for the ParaBank demo site
+- Node.js
+- npm
+- Playwright browser dependencies
+- Internet access for the demo application
 
 ## Installation
 
@@ -80,9 +88,9 @@ npm install
 npx playwright install
 ```
 
-## Run Tests
+## Running the Tests
 
-Run the default suite:
+Run the full default suite:
 
 ```bash
 npm test
@@ -94,7 +102,7 @@ Run the human-style configuration:
 npm run test:human
 ```
 
-Run specific test groups:
+Run tagged test groups:
 
 ```bash
 npm run smoke
@@ -103,8 +111,6 @@ npm run sanity
 ```
 
 ## Available Scripts
-
-The project includes the following scripts in `package.json`:
 
 ```json
 {
@@ -121,12 +127,21 @@ The project includes the following scripts in `package.json`:
 }
 ```
 
+## Test Coverage
+
+The suite currently includes checks for:
+
+- Registration flow
+- Invalid login handling
+- Forgot login validation
+- Account creation
+- Transfer funds
+- Bill payment
+- Required field validation
+
 ## Reporting
 
-This project is configured to generate:
-
-- Playwright HTML report
-- Allure report for richer test reporting
+This project is configured to generate both HTML and Allure reports.
 
 Generate the Allure report:
 
@@ -137,36 +152,29 @@ npm run allure:open
 
 ## Configuration
 
-The Playwright config is defined in `playwright.config.js` and includes:
+The project uses `playwright.config.js` with:
 
-- Chromium browser project setup
-- Base URL for ParaBank
+- Chromium project setup
+- Base URL pointing to ParaBank
 - HTML reporter
 - Allure reporter
 - Video capture
-- Retry and failure tracing support
+- Retry and trace support for failures
 
-## Example Test Coverage
+## Why This Project?
 
-The current automated suite includes scenarios for:
+This repository is a strong example of:
 
-- Registration success
-- Login success and logout flow
-- Opening a new account
-- Transfer funds
-- Bill payment
-- Invalid login errors
-- Required field validation
+- structured UI test automation
+- reusable page object patterns
+- maintainable test code
+- practical Git-based automation learning
 
-## Notes
-
-- Tests are built using reusable page objects for maintainability.
-- Data generation is handled dynamically to keep the suite realistic and isolated.
-- The project is a good example of practicing Git workflows alongside software testing automation.
+It is ideal for developers or QA engineers who want to practice Playwright while improving their Git and automation fundamentals.
 
 ## License
 
-This project is currently licensed under the ISC license as declared in `package.json`.
+This project is licensed under the ISC license as declared in `package.json`.
 
 ## Author
 
