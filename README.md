@@ -1,39 +1,40 @@
 # Playwright Git Practice
 
-A Playwright-based end-to-end automation project built for practicing Git workflows and browser test automation. The project uses the Page Object Model (POM) pattern and targets the ParaBank demo application to cover user registration, login, account creation, money transfers, bill payments, and validation scenarios.
+A practical Playwright automation project designed for Git practice and browser-based end-to-end testing. This repository demonstrates how to structure automated UI tests with the Page Object Model (POM), reusable fixtures, and quality reporting using Playwright and Allure.
 
 ## Overview
 
-This repository demonstrates:
+This project targets the ParaBank demo application and covers common web flows such as:
 
-- Playwright automation with JavaScript
-- Page Object Model design
-- Reusable fixtures for test data and page management
-- Regression-style E2E test coverage
-- Allure reporting support
-- Browser-based validation using ParaBank
+- User registration
+- Valid and invalid login scenarios
+- Password recovery / forgot login
+- Account creation
+- Funds transfer
+- Bill payment
+- Field validation checks
 
 ## Tech Stack
 
 - JavaScript
 - Playwright
-- Allure Playwright
-- Faker.js
 - Node.js
+- Faker.js
+- Allure Playwright
 
-## Project Structure
+## Repository Structure
 
 ```text
 playwright-git-practice/
-├── .github/                 # GitHub-related workflow/config files
-├── .codex/                  # Codex related metadata
+├── .github/                 # GitHub-related configuration
+├── .codex/                 # Project metadata/configuration
 ├── .playwright-mcp/         # Playwright MCP setup files
-├── .vscode/                # VS Code workspace settings
-├── allure-report/          # Generated Allure HTML report
-├── allure-results/         # Raw Allure test results
-├── fixture/                # Reusable Playwright test fixtures
+├── .vscode/                # Editor settings
+├── allure-report/          # Generated HTML report
+├── allure-results/         # Raw Allure results
+├── fixture/                # Playwright fixtures
 │   └── testfixtures.js
-├── page/                   # Page Object classes
+├── page/                   # Page Object Model files
 │   ├── POManager.js
 │   ├── billpay.js
 │   ├── forgotloginpage.js
@@ -42,12 +43,12 @@ playwright-git-practice/
 │   ├── overviewpage.js
 │   ├── registrationpage.js
 │   └── transferfunds.js
-├── specs/                  # Test specification folders
-├── test-plans/             # Manual or structured test plans
-├── tests/                  # Playwright test specs
+├── specs/                  # Additional test specs
+├── test-plans/             # Test planning artifacts
+├── tests/                  # Playwright test suite
 │   ├── e2etestscripts.spec.js
 │   └── old_e2etestscripts.spec.js
-├── utils/                  # Helper logic
+├── utils/                  # Shared helpers and utilities
 │   ├── datagenerator.js
 │   ├── steps.js
 │   └── ...
@@ -57,29 +58,18 @@ playwright-git-practice/
 ├── playwright.config.js
 ├── playwright.human.config.js
 ├── package-lock.json
-└── README.md
+├── README.md
+└── LICENSE (if present)
 ```
-
-## Features
-
-- Registration flow validation
-- Invalid login validation
-- Forgot login info validation
-- New account creation
-- Funds transfer flow
-- Bill payment flow
-- Reusable test data generation
-- Step-level logging for better debugging
-- Allure + HTML reporting
 
 ## Prerequisites
 
-Before running the tests, make sure you have:
+Before running the project, ensure you have:
 
 - Node.js installed
 - npm installed
-- A browser engine available for Playwright
-- Internet access to access the ParaBank app
+- Playwright browser dependencies installed
+- Access to the internet for the ParaBank demo site
 
 ## Installation
 
@@ -90,7 +80,7 @@ npm install
 npx playwright install
 ```
 
-## Running Tests
+## Run Tests
 
 Run the default suite:
 
@@ -98,13 +88,13 @@ Run the default suite:
 npm test
 ```
 
-Run with a human-style config:
+Run the human-style configuration:
 
 ```bash
 npm run test:human
 ```
 
-Run tagged test groups:
+Run specific test groups:
 
 ```bash
 npm run smoke
@@ -114,68 +104,69 @@ npm run sanity
 
 ## Available Scripts
 
-From `package.json`:
+The project includes the following scripts in `package.json`:
 
 ```json
-"scripts": {
-  "test": "npx playwright test --project=chrome",
-  "test:human": "npx playwright test --project=chrome --config=playwright.human.config.js",
-  "build": "npx playwright install --with-deps && npx playwright test",
-  "smoke": "npx playwright test --grep @smoke --project=chrome",
-  "regression": "npx playwright test --grep @regression --project=chrome",
-  "sanity": "npx playwright test --grep @sanity --project=chrome",
-  "allure:generate": "npx -y allure-commandline generate allure-results --clean -o allure-report",
-  "allure:open": "npx -y allure-commandline open allure-report"
+{
+  "scripts": {
+    "test": "npx playwright test --project=chrome",
+    "test:human": "npx playwright test --project=chrome --config=playwright.human.config.js",
+    "build": "npx playwright install --with-deps && npx playwright test",
+    "smoke": "npx playwright test --grep @smoke --project=chrome",
+    "regression": "npx playwright test --grep @regression --project=chrome",
+    "sanity": "npx playwright test --grep @sanity --project=chrome",
+    "allure:generate": "npx -y allure-commandline generate allure-results --clean -o allure-report",
+    "allure:open": "npx -y allure-commandline open allure-report"
+  }
 }
 ```
 
-## Test Configuration
-
-The project uses Playwright config with:
-
-- Chromium project setup
-- Base URL: `https://parabank.parasoft.com/parabank/`
-- HTML reporter
-- Allure reporter
-- Local video capture
-- Trace collection on retry
-
-## Example Test Coverage
-
-The current suite includes scenarios such as:
-
-- User registration
-- Login after registration
-- Open new account
-- Transfer funds
-- Bill pay
-- Invalid login attempt
-- Required field validation checks
-
 ## Reporting
 
-Generate and open the Allure report:
+This project is configured to generate:
+
+- Playwright HTML report
+- Allure report for richer test reporting
+
+Generate the Allure report:
 
 ```bash
 npm run allure:generate
 npm run allure:open
 ```
 
-HTML reports are also generated automatically by Playwright.
+## Configuration
+
+The Playwright config is defined in `playwright.config.js` and includes:
+
+- Chromium browser project setup
+- Base URL for ParaBank
+- HTML reporter
+- Allure reporter
+- Video capture
+- Retry and failure tracing support
+
+## Example Test Coverage
+
+The current automated suite includes scenarios for:
+
+- Registration success
+- Login success and logout flow
+- Opening a new account
+- Transfer funds
+- Bill payment
+- Invalid login errors
+- Required field validation
 
 ## Notes
 
-- The project follows a structured automation approach with reusable page objects.
-- Test data is generated dynamically to reduce dependency on static credentials.
-- The repo is suitable for practicing Git-based automation and browser testing workflows.
+- Tests are built using reusable page objects for maintainability.
+- Data generation is handled dynamically to keep the suite realistic and isolated.
+- The project is a good example of practicing Git workflows alongside software testing automation.
 
 ## License
 
-This project is currently using the ISC license as defined in `package.json`.
-
-## Contributing
-
-Feel free to fork the repository and add more scenarios, improve the page object layer, or extend the test suite.
+This project is currently licensed under the ISC license as declared in `package.json`.
 
 ## Author
 
