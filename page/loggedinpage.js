@@ -6,6 +6,11 @@ export class loggedinpage {
     this.userloggedcheck = page.getByRole("heading", {
       name: "Accounts Overview",
     });
+    this.logoutlink = page.getByRole("link", { name: "Log Out" });
+  }
+
+  async logout() {
+    await this.logoutlink.click();
   }
 
   async loggedinuser() {

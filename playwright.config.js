@@ -14,6 +14,8 @@ import { defineConfig, devices } from "@playwright/test";
  */
 export default defineConfig({
   testDir: "./tests",
+  /* Superseded copy of e2etestscripts.spec.js: kept in the repo but not executed */
+  testIgnore: ["**/old_e2etestscripts.spec.js"],
   /* Run tests in files in parallel */
   fullyParallel: true,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
@@ -24,21 +26,20 @@ export default defineConfig({
   workers: process.env.CI ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: [
-    ["html"],
-    ["dot"],
-    ["line"],
     ["list"],
-    ["allure-playwright", { outputfolder: "allure-results" }],
+    ["html", { open: "never" }],
+    ["allure-playwright", { resultsDir: "allure-results" }],
   ],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('')`. */
-    // baseURL: 'http://localhost:3000',
+    baseURL: "https://parabank.parasoft.com/parabank/",
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: "on-first-retry",
     launchOptions: {
-      slowMo: 1000,
+      // Opt-in only, e.g. SLOWMO=500 npx playwright test (was a fixed 1000ms on every action)
+      slowMo: Number(process.env.SLOWMO) || 0,
     },
   },
 
@@ -48,6 +49,10 @@ export default defineConfig({
       name: "chrome",
       use: {
         browserName: "chromium",
+        // Headed locally, headless on CI (CI runners have no display)
+        headless: !!process.env.CI,
+        screenshot: "only-on-failure",
+        trace: "retain-on-failure",
         headless: !!process.env.CI,
         screenshot: "on",
         trace: "on",
