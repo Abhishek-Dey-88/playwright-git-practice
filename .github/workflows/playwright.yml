@@ -2,21 +2,41 @@ name: Playwright Tests
 on:
   push:
     branches: [ main, master ]
+    paths-ignore: [ '**.md' ] # docs-only changes don't need a test run
   pull_request:
     branches: [ main, master ]
+    paths-ignore: [ '**.md' ]
+# a newer push to the same branch/PR cancels the run still in progress
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 jobs:
   test:
-    timeout-minutes: 60
+    timeout-minutes: 20
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
     - uses: actions/setup-node@v4
       with:
         node-version: lts/*
+        cache: npm
     - name: Install dependencies
       run: npm ci
-    - name: Install Playwright Browsers
-      run: npx playwright install --with-deps
+    # browsers are reused until package-lock.json (and so the Playwright version) changes
+    - name: Cache Playwright browsers
+      id: playwright-cache
+      uses: actions/cache@v4
+      with:
+        path: ~/.cache/ms-playwright
+        key: ${{ runner.os }}-playwright-${{ hashFiles('package-lock.json') }}
+    - name: Install Playwright Chromium
+      if: steps.playwright-cache.outputs.cache-hit != 'true'
+      timeout-minutes: 10
+      run: npx playwright install --with-deps chromium
+    - name: Install Playwright system dependencies
+      if: steps.playwright-cache.outputs.cache-hit == 'true'
+      timeout-minutes: 10
+      run: npx playwright install-deps chromium
     - name: Run Playwright tests
       run: npx playwright test
       env:
