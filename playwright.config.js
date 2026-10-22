@@ -16,14 +16,14 @@ export default defineConfig({
   testDir: "./tests",
   /* Superseded copy of e2etestscripts.spec.js: kept in the repo but not executed */
   testIgnore: ["**/old_e2etestscripts.spec.js"],
-  /* Run tests in files in parallel */
-  fullyParallel: true,
+  /* Parallel on CI; locally one after another, in file order */
+  fullyParallel: !!process.env.CI,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
   forbidOnly: !!process.env.CI,
   /* Retry on CI only */
   retries: process.env.CI ? 2 : 0,
-  /* Opt out of parallel tests on CI. */
-  workers: process.env.CI ? 1 : undefined,
+  /* Default worker count on CI; a single worker locally so only one test runs at a time */
+  workers: process.env.CI ? undefined : 1,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: [
     ["list"],
@@ -51,11 +51,9 @@ export default defineConfig({
         browserName: "chromium",
         // Headed locally, headless on CI (CI runners have no display)
         headless: !!process.env.CI,
-        screenshot: "only-on-failure",
-        trace: "retain-on-failure",
-        headless: !!process.env.CI,
-        screenshot: "on",
-        trace: "on",
+        // CI records everything; locally only video always, screenshot/trace on failure
+        screenshot: process.env.CI ? "on" : "only-on-failure",
+        trace: process.env.CI ? "on" : "retain-on-failure",
         video: "on",
         // viewport:{width:1080,height:720},
         ...devices["Desktop Chrome"],

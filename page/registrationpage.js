@@ -1,3 +1,5 @@
+import { expect } from "@playwright/test";
+
 export class registrationpage {
   constructor(page) {
     this.page = page;
@@ -73,17 +75,32 @@ export class registrationpage {
     uname,
     password,
   ) {
-    await this.firstname.fill(fname);
-    await this.lastname.fill(lname);
-    await this.address.fill(addr);
-    await this.city.fill(city);
-    await this.state.fill(state);
-    await this.zipcode.fill(zip);
-    await this.phonenumber.fill(phone);
-    await this.SSN.fill(ssn);
-    await this.username.fill(uname);
-    await this.password.fill(password);
-    await this.confirmpassword.fill(password);
+    const fields = [
+      [this.firstname, fname],
+      [this.lastname, lname],
+      [this.address, addr],
+      [this.city, city],
+      [this.state, state],
+      [this.zipcode, zip],
+      [this.phonenumber, phone],
+      [this.SSN, ssn],
+      [this.username, uname],
+      [this.password, password],
+      [this.confirmpassword, password],
+    ];
+
+    for (const [field, value] of fields) {
+      await field.fill(value);
+    }
+
+    // the page can wipe an early fill while it is still loading, so re-type any
+    // field that ended up empty and confirm every field holds its value
+    for (const [field, value] of fields) {
+      if ((await field.inputValue()) === "") {
+        await field.fill(value);
+      }
+      await expect(field).toHaveValue(value);
+    }
   }
 
   async clickonregisterbtn() {

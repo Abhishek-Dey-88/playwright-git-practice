@@ -4,7 +4,9 @@ import { test } from "@playwright/test";
 // appears in the HTML / Allure reports and the trace viewer.
 export function createStepLogger() {
   let count = 0;
-  console.log(`\nMain test case executing: ${test.info().title}`);
+  const heading = `Test case executing: ${test.info().title}`;
+  const rule = "=".repeat(heading.length);
+  console.log(`\n\x1b[1m${rule}\n${heading}\n${rule}\x1b[0m`);
   return async function step(message, fn) {
     count += 1;
     const label = `Step ${count} : ${message}`;

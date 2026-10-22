@@ -19,6 +19,8 @@ export class homepage {
 
   async clickonregisterlink() {
     await this.registerationlink.click();
+    // wait for register.htm to finish loading; filling earlier can lose the first field's value
+    await this.page.waitForURL(/register\.htm/);
   }
 
   async clickonforgotlogininfolink() {

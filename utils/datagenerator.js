@@ -23,7 +23,9 @@ export class test_Data {
     return saved.at(-1);
   }
   datafiller() {
-    const username = `Tester${Date.now()}`;
+    // Random suffix keeps usernames unique when parallel workers register in the same
+    // millisecond; timestamp is trimmed so the length stays as before (19 chars)
+    const username = `Tester${String(Date.now()).slice(-9)}${faker.string.numeric(4)}`;
     const password = faker.internet.password();
 
     // Order must match fillregistrationform(fname, lname, addr, city, state, zip, phone, ssn, uname, password)
@@ -44,7 +46,7 @@ export class test_Data {
   // Made-up credentials that are never registered (for the invalid-login check)
   invalidlogindata() {
     return {
-      username: `qa_invalid_user_${Date.now()}`,
+      username: `qa_invalid_user_${String(Date.now()).slice(-9)}${faker.string.numeric(4)}`,
       password: faker.internet.password(),
     };
   }

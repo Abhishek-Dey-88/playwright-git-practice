@@ -1,0 +1,5 @@
+Bill Payment Complete
+
+Bill Payment to Gulgowski and Sons in the amount of $6.00 from account 14565 was successful.
+
+See Account Activity for more details.
