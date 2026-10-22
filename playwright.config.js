@@ -16,14 +16,14 @@ export default defineConfig({
   testDir: "./tests",
   /* Superseded copy of e2etestscripts.spec.js: kept in the repo but not executed */
   testIgnore: ["**/old_e2etestscripts.spec.js"],
-  /* Run tests in files in parallel */
-  fullyParallel: true,
+  /* Parallel on CI; locally one after another, in file order */
+  fullyParallel: !!process.env.CI,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
   forbidOnly: !!process.env.CI,
   /* Retry on CI only */
   retries: process.env.CI ? 2 : 0,
-  /* Opt out of parallel tests on CI. */
-  workers: process.env.CI ? 1 : undefined,
+  /* Default worker count on CI; a single worker locally so only one test runs at a time */
+  workers: process.env.CI ? undefined : 1,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: [
     ["list"],
