@@ -1,5 +1,0 @@
-Bill Payment Complete
-
-Bill Payment to Aufderhar - Blick in the amount of $34.00 from account 16008 was successful.
-
-See Account Activity for more details.

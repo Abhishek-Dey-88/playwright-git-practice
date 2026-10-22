@@ -1,5 +1,0 @@
-Bill Payment Complete
-
-Bill Payment to Considine - Mayer in the amount of $87.00 from account 25554 was successful.
-
-See Account Activity for more details.
