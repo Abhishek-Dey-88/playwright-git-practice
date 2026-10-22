@@ -4,6 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "postinstall": "node scripts/setup.js",
+    "setup": "node scripts/setup.js",
     "test": "npx playwright test --project=chrome",
     "test:human": "npx playwright test --project=chrome --config=playwright.human.config.js",
     "build": "npx playwright install --with-deps && npx playwright test",

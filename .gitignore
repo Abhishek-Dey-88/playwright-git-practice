@@ -7,3 +7,7 @@ node_modules/
 /playwright/.cache/
 /playwright/.auth/
 utils/credentials.json
+
+# Allure (generated on every run)
+/allure-results/
+/allure-report/
