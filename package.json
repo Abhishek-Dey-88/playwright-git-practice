@@ -6,6 +6,7 @@
   "scripts": {
     "test": "npx playwright test --project=chrome",
     "test:human": "npx playwright test --project=chrome --config=playwright.human.config.js",
+    "build": "npx playwright install --with-deps && npx playwright test",
     "smoke": "npx playwright test --grep @smoke --project=chrome",
     "regression": "npx playwright test --grep @regression --project=chrome",
     "sanity": "npx playwright test --grep @sanity --project=chrome",
