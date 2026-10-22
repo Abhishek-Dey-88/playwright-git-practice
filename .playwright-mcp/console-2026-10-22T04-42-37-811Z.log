@@ -1,2 +1,0 @@
-[    1204ms] [VERBOSE] [DOM] Input elements should have autocomplete attributes (suggested: "current-password"): (More info: https://goo.gl/9p2vKq) %o @ https://parabank.parasoft.com/parabank/index.htm:0
-[   11216ms] [VERBOSE] [DOM] Input elements should have autocomplete attributes (suggested: "current-password"): (More info: https://goo.gl/9p2vKq) %o @ https://parabank.parasoft.com/parabank/login.htm;jsessionid=566F3937177C9037F1A2B894ADF9FCF0:0

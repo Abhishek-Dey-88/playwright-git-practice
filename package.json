@@ -2,13 +2,11 @@
   "name": "new-project",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
   "scripts": {
     "postinstall": "node scripts/setup.js",
     "setup": "node scripts/setup.js",
     "test": "npx playwright test --project=chrome",
     "test:human": "npx playwright test --project=chrome --config=playwright.human.config.js",
-    "build": "npx playwright install --with-deps && npx playwright test",
     "smoke": "npx playwright test --grep @smoke --project=chrome",
     "regression": "npx playwright test --grep @regression --project=chrome",
     "sanity": "npx playwright test --grep @sanity --project=chrome",

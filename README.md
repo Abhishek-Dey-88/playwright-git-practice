@@ -50,7 +50,6 @@ This project is designed to validate real-world web application flows against th
 playwright-git-practice/
 ├── .github/                 # GitHub-related configuration
 ├── .codex/                  # Project metadata/configuration
-├── .playwright-mcp/         # Playwright MCP setup files
 ├── .vscode/                 # VS Code workspace settings
 ├── allure-report/           # Generated HTML report
 ├── allure-results/          # Raw Allure test results
@@ -68,8 +67,7 @@ playwright-git-practice/
 ├── specs/                   # Additional specs folder
 ├── test-plans/              # Test planning files
 ├── tests/
-│   ├── e2etestscripts.spec.js
-│   └── old_e2etestscripts.spec.js
+│   └── e2etestscripts.spec.js
 ├── utils/
 │   ├── datagenerator.js     # Fake user and data generation
 │   ├── steps.js             # Step logger utility
@@ -186,7 +184,6 @@ npm run sanity
   "scripts": {
     "test": "npx playwright test --project=chrome",
     "test:human": "npx playwright test --project=chrome --config=playwright.human.config.js",
-    "build": "npx playwright install --with-deps && npx playwright test",
     "smoke": "npx playwright test --grep @smoke --project=chrome",
     "regression": "npx playwright test --grep @regression --project=chrome",
     "sanity": "npx playwright test --grep @sanity --project=chrome",

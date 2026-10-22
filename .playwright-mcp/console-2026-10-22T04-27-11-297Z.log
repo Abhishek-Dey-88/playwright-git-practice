@@ -1,9 +1,0 @@
-[    1653ms] [VERBOSE] [DOM] Input elements should have autocomplete attributes (suggested: "current-password"): (More info: https://goo.gl/9p2vKq) %o @ https://parabank.parasoft.com/parabank/index.htm:0
-[  199854ms] [VERBOSE] [DOM] Input elements should have autocomplete attributes (suggested: "new-password"): (More info: https://goo.gl/9p2vKq) %o @ https://parabank.parasoft.com/parabank/register.htm;jsessionid=2EAB84825B5FC05F3A2505D4B6A9D5F1:0
-[  199854ms] [VERBOSE] [DOM] Input elements should have autocomplete attributes (suggested: "new-password"): (More info: https://goo.gl/9p2vKq) %o @ https://parabank.parasoft.com/parabank/register.htm;jsessionid=2EAB84825B5FC05F3A2505D4B6A9D5F1:0
-[  199855ms] [VERBOSE] [DOM] Input elements should have autocomplete attributes (suggested: "current-password"): (More info: https://goo.gl/9p2vKq) %o @ https://parabank.parasoft.com/parabank/register.htm;jsessionid=2EAB84825B5FC05F3A2505D4B6A9D5F1:0
-[  207472ms] [VERBOSE] [DOM] Input elements should have autocomplete attributes (suggested: "new-password"): (More info: https://goo.gl/9p2vKq) %o @ https://parabank.parasoft.com/parabank/register.htm:0
-[  207473ms] [VERBOSE] [DOM] Input elements should have autocomplete attributes (suggested: "new-password"): (More info: https://goo.gl/9p2vKq) %o @ https://parabank.parasoft.com/parabank/register.htm:0
-[  207473ms] [VERBOSE] [DOM] Input elements should have autocomplete attributes (suggested: "current-password"): (More info: https://goo.gl/9p2vKq) %o @ https://parabank.parasoft.com/parabank/register.htm:0
-[  212079ms] [VERBOSE] [DOM] Input elements should have autocomplete attributes (suggested: "current-password"): (More info: https://goo.gl/9p2vKq) %o @ https://parabank.parasoft.com/parabank/lookup.htm:0
-[  221782ms] [VERBOSE] [DOM] Input elements should have autocomplete attributes (suggested: "current-password"): (More info: https://goo.gl/9p2vKq) %o @ https://parabank.parasoft.com/parabank/lookup.htm:0
