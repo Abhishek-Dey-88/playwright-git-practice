@@ -51,11 +51,9 @@ export default defineConfig({
         browserName: "chromium",
         // Headed locally, headless on CI (CI runners have no display)
         headless: !!process.env.CI,
-        screenshot: "only-on-failure",
-        trace: "retain-on-failure",
-        headless: !!process.env.CI,
-        screenshot: "on",
-        trace: "on",
+        // CI records everything; locally only video always, screenshot/trace on failure
+        screenshot: process.env.CI ? "on" : "only-on-failure",
+        trace: process.env.CI ? "on" : "retain-on-failure",
         video: "on",
         // viewport:{width:1080,height:720},
         ...devices["Desktop Chrome"],
