@@ -2,7 +2,7 @@ import { customtest as test, expect } from "../fixture/testfixtures.js";
 
 test.describe.configure({ mode: "serial" });
 
-test("@regressionbankregistartioncheck", async ({ pomanager, testdata }) => {
+test.skip("@regressionbankregistartioncheck", async ({ pomanager, testdata }) => {
   const data = testdata.datafiller();
   const [username, password] = data.slice(8);
 
@@ -78,7 +78,7 @@ ctest.("bankregistartion with fixtureS",async ({ page, testdataForregistration }
 
 */
 
-test("@regressionlogin&openewaccountcheck", async ({ pomanager, testdata }) => {
+test.skip("@regressionlogin&openewaccountcheck", async ({ pomanager, testdata }) => {
   await pomanager.gethomepage().goTo();
   const { username, password } = testdata.getlatestcredentials();
   await pomanager.gethomepage().login(username, password);

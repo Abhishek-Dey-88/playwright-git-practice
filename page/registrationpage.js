@@ -39,6 +39,26 @@ export class registrationpage {
       "Your account was created successfully. You are now logged in.",
       { exact: true },
     );
+    this.signupheading = page.getByRole("heading", { name: "Signing up is easy!" });
+    this.requiredfieldmessages = [
+      "First name is required.",
+      "Last name is required.",
+      "Address is required.",
+      "City is required.",
+      "State is required.",
+      "Zip Code is required.",
+      "Social Security Number is required.",
+      "Username is required.",
+      "Password is required.",
+      "Password confirmation is required.",
+    ];
+  }
+
+  // one locator per expected validation message, in the order listed above
+  getrequiredfielderrors() {
+    return this.requiredfieldmessages.map((message) =>
+      this.page.getByText(message, { exact: true }),
+    );
   }
 
   async fillregistrationform(

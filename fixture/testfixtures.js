@@ -11,6 +11,24 @@ export const customtest = test.extend({
     await use(new test_Data());
   },
 
+  // Registers a brand-new ParaBank user for this test (ParaBank credentials expire
+  // after a few hours, so they cannot be reused). ParaBank logs the user in
+  // automatically after registration, so the test starts on a logged-in page.
+  registeredUser: async ({ pomanager, testdata }, use) => {
+    const data = testdata.datafiller();
+    const [username, password] = data.slice(8);
+
+    await pomanager.gethomepage().goTo();
+    await pomanager.gethomepage().clickonregisterlink();
+    await pomanager.getregistrationpage().fillregistrationform(...data);
+    await pomanager.getregistrationpage().clickonregisterbtn();
+    await expect(
+      pomanager.getregistrationpage().successregistrationmessage,
+    ).toBeVisible();
+
+    await use({ username, password });
+  },
+
   testdataForregistration: async ({}, use) => {
     await use({
       firstname: "Testers",

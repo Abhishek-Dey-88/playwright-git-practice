@@ -3,6 +3,8 @@ import { loggedinpage } from "./loggedinpage.js";
 import { registrationpage } from "./registrationpage.js";
 import { overviewpage } from "./overviewpage.js";
 import { transferfunds } from "./transferfunds.js";
+import { billpay } from "./billpay.js";
+import { forgotloginpage } from "./forgotloginpage.js";
 
 export class POManager {
   constructor(page) {
@@ -12,6 +14,8 @@ export class POManager {
     this.loggedinPage = new loggedinpage(this.page);
     this.overviewPage = new overviewpage(this.page);
     this.transferFunds = new transferfunds(this.page);
+    this.billPay = new billpay(this.page);
+    this.forgotLoginPage = new forgotloginpage(this.page);
   }
 
   gethomepage() {
@@ -32,5 +36,13 @@ export class POManager {
 
   gettransferfunds() {
     return this.transferFunds;
+  }
+
+  getbillpay() {
+    return this.billPay;
+  }
+
+  getforgotloginpage() {
+    return this.forgotLoginPage;
   }
 }

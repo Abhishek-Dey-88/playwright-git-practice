@@ -4,8 +4,9 @@ export class transferfunds{
 constructor(page){
     this.page=page
     this.transferfundslink = page.getByRole('link', { name: 'Transfer Funds' }) ;
-    this.amountinputbox = page.getByRole('textbox');
-    this.tansferbtn = page.getByRole('button');
+    this.amountinputbox = page.locator('#amount');
+    this.transferbtn = page.getByRole('button', { name: 'Transfer' });
+    this.fromaccountoptions = page.locator('#fromAccountId option');
     this.transfersuccessmsg= page.locator('#showResult');
 }
 
@@ -18,11 +19,12 @@ async amounttextbox(amount){
 }
 
 async clickontransferbtn(){
-    await this.tansferbtn.click()
+    // account dropdown options load asynchronously; submitting earlier transfers nothing
+    await expect(this.fromaccountoptions.first()).toBeAttached()
+    await this.transferbtn.click()
 }
 async gettransfersuccessmsg(){
-    const transferSuccessMsg = await this.transfersuccessmsg.textContent();
-    await expect(this.transfersuccessmsg).toContainText('Transfer Complete!')
-    return transferSuccessMsg;
+    await this.transfersuccessmsg.waitFor();
+    return (await this.transfersuccessmsg.textContent()).trim();
 }
 }

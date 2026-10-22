@@ -40,4 +40,28 @@ export class test_Data {
       password,
     ];
   }
+
+  // Made-up credentials that are never registered (for the invalid-login check)
+  invalidlogindata() {
+    return {
+      username: `qa_invalid_user_${Date.now()}`,
+      password: faker.internet.password(),
+    };
+  }
+
+  // Payee + whole-dollar amount for the Bill Pay form (see billpay.fillpayeedetails)
+  billpaydata() {
+    return {
+      payee: {
+        name: faker.company.name(),
+        address: faker.location.streetAddress(),
+        city: faker.location.city(),
+        state: faker.location.state(),
+        zipcode: faker.location.zipCode(),
+        phonenumber: faker.string.numeric(10),
+        accountnumber: faker.string.numeric(8),
+      },
+      amount: String(faker.number.int({ min: 1, max: 100 })),
+    };
+  }
 }

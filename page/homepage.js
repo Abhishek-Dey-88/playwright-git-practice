@@ -4,15 +4,25 @@ export class homepage {
     this.registerationlink = page.getByRole("link", { name: "Register" });
     this.loginusername = page.locator("//input[@name='username']");
     this.loginpassword = page.locator("//input[@name='password']");
-    this.loginbtn = page.locator("//input[@value='Log In']");
+    this.loginbtn = page.getByRole("button", { name: "Log In" });
+    this.forgotlogininfolink = page.getByRole("link", { name: "Forgot login info?" });
+    this.loginerrorheading = page.getByRole("heading", { name: "Error!" });
+    this.loginerrormessage = page.getByText(
+      "The username and password could not be verified.",
+      { exact: true },
+    );
   }
 
   async goTo() {
-    await this.page.goto("https://parabank.parasoft.com/parabank/index.htm");
+    await this.page.goto("index.htm"); // resolved against baseURL in playwright.config.js
   }
 
   async clickonregisterlink() {
     await this.registerationlink.click();
+  }
+
+  async clickonforgotlogininfolink() {
+    await this.forgotlogininfolink.click();
   }
 
   async login(uname, password) {
