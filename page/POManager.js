@@ -5,6 +5,7 @@ import { overviewpage } from "./overviewpage.js";
 import { transferfunds } from "./transferfunds.js";
 import { billpay } from "./billpay.js";
 import { forgotloginpage } from "./forgotloginpage.js";
+import { findtransactions } from "./findtransactions.js";
 
 export class POManager {
   constructor(page) {
@@ -16,6 +17,7 @@ export class POManager {
     this.transferFunds = new transferfunds(this.page);
     this.billPay = new billpay(this.page);
     this.forgotLoginPage = new forgotloginpage(this.page);
+    this.findTransactions = new findtransactions(this.page);
   }
 
   gethomepage() {
@@ -44,5 +46,9 @@ export class POManager {
 
   getforgotloginpage() {
     return this.forgotLoginPage;
+  }
+
+  getfindtransactions() {
+    return this.findTransactions;
   }
 }

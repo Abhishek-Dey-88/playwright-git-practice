@@ -248,6 +248,7 @@ The suite currently includes checks for:
 - Account creation
 - Transfer funds
 - Bill payment
+- Find transactions by amount
 - Required field validation
 
 ## Reporting

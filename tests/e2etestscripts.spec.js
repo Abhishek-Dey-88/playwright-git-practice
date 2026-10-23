@@ -198,3 +198,45 @@ test("@regressionaccountrecoveryrequiredfieldscheck", async ({ pomanager }) => {
     await expect(pomanager.getforgotloginpage().customerinfoheading).toHaveCount(0);
   });
 });
+
+test("@regressionfindtransactionbyamountcheck", async ({
+  pomanager,
+  testdata,
+  registeredUser,
+}) => {
+  const step = createStepLogger();
+  const { payee, amount } = testdata.billpaydata();
+
+  await step("Verifying user is logged in after registration...", async () => {
+    await expect(pomanager.getloggedinpage().logoutlink).toBeVisible();
+  });
+  await step("Making a bill payment to create a known transaction...", async () => {
+    await pomanager.getbillpay().clickonbillpaylink();
+    await pomanager.getbillpay().fillpayeedetails(payee);
+    await pomanager.getbillpay().enteramount(amount);
+    await pomanager.getbillpay().clickonsendpayment();
+    expect(await pomanager.getbillpay().getpaymentresulttext()).toContain(
+      "Bill Payment Complete",
+    );
+  });
+  await step("Clicking on Find Transactions link...", async () => {
+    await pomanager.getfindtransactions().clickonfindtransactionslink();
+  });
+  await step(`Searching transactions by amount ${amount}...`, async () => {
+    await pomanager.getfindtransactions().findbyamount(amount);
+  });
+  await step("Verifying the bill payment is found...", async () => {
+    await expect(pomanager.getfindtransactions().resultheading).toBeVisible();
+    const row = pomanager
+      .getfindtransactions()
+      .gettransactionrow(`Bill Payment to ${payee.name}`);
+    await expect(row).toHaveCount(1);
+    await expect(row).toContainText(`$${amount}.00`);
+    const rowText = (await row.innerText()).trim();
+    console.log(`Transaction found:\n${rowText}`);
+    await test.info().attach("found-transaction", {
+      body: rowText,
+      contentType: "text/plain",
+    });
+  });
+});
